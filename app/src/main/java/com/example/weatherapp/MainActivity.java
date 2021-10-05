@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         GPS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MainWeather.class);
 
-
-
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED){
                         //get the location
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                                 if(location!=null){
                                     lat=location.getLatitude();
                                     longt=location.getLongitude();
-                                    Intent intent=new Intent(MainActivity.this,MainWeather.class);
                                     intent.putExtra("lat",location.getLatitude());
                                     intent.putExtra("longt",location.getLongitude());
                                     startActivity(intent);
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
                     }
                 }
-
+                }
         });
     }
 }
